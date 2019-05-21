@@ -1,0 +1,171 @@
+SQL> select * from school;
+
+     REGNO NAME                                MARKS
+---------- ------------------------------ ----------
+        76 Fred                                   99
+        21 Bill                                    1
+
+SQL> select name from school;
+
+NAME                          
+------------------------------
+Fred                          
+Bill                          
+
+SQL> select name,marks*100/150 from school;
+
+NAME                           MARKS*100/150
+------------------------------ -------------
+Fred                                      66
+Bill                              .666666667
+
+SQL> select name,marks from school;
+
+NAME                                MARKS
+------------------------------ ----------
+Fred                                   99
+Bill                                    1
+
+SQL> create table tesco(product char(30),price number(3),quantity number(3));
+
+Table TESCO created.
+
+SQL> insert into tesco values('7up',3,10);
+
+1 row inserted.
+
+SQL> insert into tesco values('Coke',1,15);
+
+1 row inserted.
+
+SQL> select product,price*quantity as Amount,(price*quantity)*15/100 as VAT,(price*quantity)+((price*quantity)*15/100) as Bill from tesco;
+
+PRODUCT                            AMOUNT        VAT       BILL
+------------------------------ ---------- ---------- ----------
+7up                                    30        4.5       34.5
+Coke                                   15       2.25      17.25
+
+SQL> 
+
+SQL> create table Asda(Product char(20),Price_Purchased number(5,2),Price_Sold number(5,2),Qty_Purchased number(3),Qty_Sold number(3));
+Table ASDA created.
+
+SQL> insert into Asda values('7up',1.75,2,15,10);
+
+1 row inserted.
+
+SQL> insert into Asda values('Coke',2.50,3.50,20,15);
+
+1 row inserted.
+
+
+SQL> select Product,(Qty_Purchased-Qty_Sold) as Stock from Asda;
+PRODUCT                   STOCK
+-------------------- ----------
+7up                           5
+Coke                          5
+
+SQL> select Product,(Price_sold-Price_Purchased)*Qty_sold as Profit from Asda;
+
+PRODUCT                  PROFIT
+-------------------- ----------
+7up                         2.5
+Coke                         15
+
+
+SQL> select Product,((Price_sold-Price_Purchased)*Qty_sold)-((Qty_purchased-Qty_sold)*Price_Purchased) as profit from Asda;
+PRODUCT                  PROFIT
+-------------------- ----------
+7up                       -6.25
+Coke                        2.5
+
+SQL> select Product,(Price_sold*Qty_sold)-(Price_purchased*Qty_purchased) as profit from Asda;
+
+PRODUCT                  PROFIT
+-------------------- ----------
+7up                       -6.25
+Coke                        2.5
+
+SQL> create table Consultants(RegNo number(3),Name char(10),Client char(10),Subject char(10),Marks number(3));
+Table CONSULTANTS created.
+
+SQL> insert into Consultants values(1,'A','IBM','JAVA',95);
+1 row inserted.
+
+SQL> insert into Consultants values(2,'B','ONS','JAVA',80);
+
+1 row inserted.
+
+SQL> insert into Consultants values(3,'C','IBM','Python',90);
+
+1 row inserted.
+
+SQL> insert into Consultants values(4,'D','ONS','Python',95);
+
+1 row inserted.
+
+SQL> select 8 from Consultants;
+
+         8
+----------
+         8
+         8
+         8
+         8
+
+SQL> select * from Consultants;
+
+     REGNO NAME       CLIENT     SUBJECT         MARKS
+---------- ---------- ---------- ---------- ----------
+         1 A          IBM        JAVA               95
+         2 B          ONS        JAVA               80
+         3 C          IBM        Python             90
+         4 D          ONS        Python             95
+
+SQL> select * from Consultants where Client='IBM' and Subject='JAVA';
+
+     REGNO NAME       CLIENT     SUBJECT         MARKS
+---------- ---------- ---------- ---------- ----------
+         1 A          IBM        JAVA               95
+
+SQL> select * from Consultants where Marks>=80 and Marks<=90;
+
+     REGNO NAME       CLIENT     SUBJECT         MARKS
+---------- ---------- ---------- ---------- ----------
+         2 B          ONS        JAVA               80
+         3 C          IBM        Python             90
+
+SQL> select * from Consultants where Marks<=90 and Subject='IBM';
+
+
+SQL> select * from Consultants where Marks<=90 and Subject='JAVA';
+     REGNO NAME       CLIENT     SUBJECT         MARKS
+---------- ---------- ---------- ---------- ----------
+         2 B          ONS        JAVA               80
+
+SQL> select * from Consultants where Marks<=75 and Subject='JAVA' or RegNo=1;
+
+     REGNO NAME       CLIENT     SUBJECT         MARKS
+---------- ---------- ---------- ---------- ----------
+         1 A          IBM        JAVA               95
+
+SQL> select Product,((Price_Sold-Price_Purchased)*Qty_Sold)*15/100 as VAT from Asda where (((Price_Sold-Price_Purchased)*Qty_Sold)*15/100)>7;
+PRODUCT                     VAT
+-------------------- ----------
+Dr Pepper               15.1875
+
+
+SQL> select Product,(Qty_Sold*Price_Sold)-(Qty_Sold*Price_Purchased) as Profit,((Price_Sold-Price_Purchased)*Qty_Sold)*15/100 as VAT, (((Qty_sold*Price_Sold)-(Qty_Sold*Price_Purchased))-(((Price_Sold-Price_Purchased)*Qty_Sold)*15/100)) as NetProfit from Asda where (((Price_Sold-Price_Purchased)*Qty_Sold)*15/100)>7;
+PRODUCT                  PROFIT        VAT  NETPROFIT
+-------------------- ---------- ---------- ----------
+Dr Pepper                101.25    15.1875    86.0625
+
+
+SQL> select Product,(Qty_Sold*Price_Sold)-(Qty_Sold*Price_Purchased) as Profit,((Price_Sold-Price_Purchased)*Qty_Sold)*15/100 as VAT, (((Qty_sold*Price_Sold)-(Qty_Sold*Price_Purchased))-(((Price_Sold-Price_Purchased)*Qty_Sold)*15/100)) as NetProfit from Asda;
+PRODUCT                  PROFIT        VAT  NETPROFIT
+-------------------- ---------- ---------- ----------
+7up                         2.5       .375      2.125
+Coke                         15       2.25      12.75
+Dr Pepper                101.25    15.1875    86.0625
+Robinsons                  9.75     1.4625     8.2875
+
