@@ -1,0 +1,10 @@
+create or replace procedure ADDING(A number,B number,C number)
+  2  IS
+  3  Result number(3);
+  4  BEGIN
+  5  Result:=A+B+C;
+  6  dbms_output.put_line('   Result is  '||Result);
+  7  end;
+  8* /
+
+call ADDING(6,7,8);

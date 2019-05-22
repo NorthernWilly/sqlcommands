@@ -1,0 +1,9 @@
+create or replace procedure RecordSchool(R number,N char,M number)
+  2  IS
+  3  BEGIN
+  4  insert into school values(R,N,M);
+  5  end;
+  6* /
+
+call RecordSchool(7,'Billy',57);
+
