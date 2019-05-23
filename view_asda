@@ -1,0 +1,6 @@
+SQL> create view Asda_Details as select product,
+  2  (price_sold-price_purchased)*qty_sold as profit,
+  3  (price_sold-price_purchased)*qty_sold*21/100 as VAT,
+  4* (price_sold-price_purchased)*qty_sold-((price_sold-price_purchased)*21/100) as NetProfit from asda;
+View ASDA_DETAILS created.
+
