@@ -1,0 +1,29 @@
+SQL> create or replace function Tax2(S number) return number
+  2  IS
+  3  result number(7,2);
+  4  BEGIN
+  5  if s<=500 then 
+  6  result:=0;
+  7  end if;
+  8  if s>=500 and s<=1000 then
+  9  result:=s*15/100;
+ 10  end if;
+ 11  if s>1000 then 
+ 12  result:=s*21/100;
+ 13  end if;
+ 14  return result;
+ 15  end;
+ 16* /
+Function TAX2 compiled
+
+SQL> create or replace function Dname(d number) return char
+  2  IS
+  3  DN departments.department_name%type;
+  4  BEGIN
+  5  select department_name into DN from departments where department_id=d;
+  6  return DN;
+  7  end;
+  8  /
+
+Function DNAME compiled
+

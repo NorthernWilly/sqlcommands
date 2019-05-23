@@ -1,0 +1,9 @@
+create or replace function Tax(s number) return number
+  2  IS
+  3  Result number(7,2);
+  4  BEGIN
+  5  Result:=s*21/100;
+  6  return Result;
+  7  end;
+  8* /
+

@@ -1,0 +1,15 @@
+create or replace procedure TESCO_ENTRY(cat char,sub char)
+  2  IS
+  3  newcid number(2);
+  4  newsid number(3);
+  5  BEGIN
+  6  select nvl(max(cid),0)into newcid from category where description=cat;
+  7  if newcid=0 then
+  8  select nvl(max(cid),0)+1 into newcid from category;
+  9  insert into category values (newcid,cat);
+ 10  end if;
+ 11  select nvl(max(sid),0)+1 into newsid from subcategory;
+ 12  insert into subcategory values(newcid,newsid,sub);
+ 13  end;
+ 14* /
+Procedure TESCO_ENTRY compiled
