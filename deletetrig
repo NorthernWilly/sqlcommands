@@ -1,0 +1,16 @@
+create or replace trigger Delete_School AFTER delete on school
+  2  BEGIN
+  3  DBMS_output.put_line('Are you sure you want to delete? oh, oooops!');
+  4  end;
+  5* /
+
+to display after each bit that is deleted:
+
+SQL> create or replace trigger Delete_School 
+  2  AFTER delete on school
+  3  FOR each row
+  4  BEGIN
+  5  DBMS_output.put_line('Are you sure you want to delete? oh, oooops!');
+  6  end;
+  7* /
+Trigger DELETE_SCHOOL compiled

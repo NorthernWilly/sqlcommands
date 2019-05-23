@@ -1,0 +1,12 @@
+SQL> create table Lost_Children(Reg number(3),Name char(30),Marks number(3));
+Table LOST_CHILDREN created.
+
+SQL> create or replace trigger takebackup
+  2  before delete on school
+  3  for each row
+  4  BEGIN
+  5  insert into Lost_Children values(:old.RegNo,:old.Name,:old.marks);
+  6  end;
+  7  /
+
+
